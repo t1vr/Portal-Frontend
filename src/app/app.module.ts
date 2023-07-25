@@ -12,8 +12,8 @@ import { SharedModule } from '@shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import interceptors from './core/services/interceptors';
 import { LoginModalModule } from './widget/biz-widget/login/login-modal.module';
+import { SubWindowWithService } from './core/services/common/sub-window-with.service';
 
 export function StartupServiceFactory(startupService: StartupService) {
   return () => startupService.load();
@@ -31,9 +31,9 @@ export function InitThemeServiceFactory(initThemeService: InitThemeService) {
 //   return () => subLockedStatusService.initLockedStatus();
 // }
 
-// export function SubWindowWithServiceFactory(subWindowWithService: SubWindowWithService) {
-//   return () => subWindowWithService.subWindowWidth();
-// }
+export function SubWindowWithServiceFactory(subWindowWithService: SubWindowWithService) {
+  return () => subWindowWithService.subWindowWidth();
+}
 
 // Initialize service
 const APPINIT_PROVIDES = [
@@ -69,12 +69,12 @@ const APPINIT_PROVIDES = [
   },
   //
   //Initialize the monitoring screen width service
-  // {
-  //   provide: APP_INITIALIZER,
-  //   useFactory: SubWindowWithServiceFactory,
-  //   deps: [SubWindowWithService],
-  //   multi: true
-  // },
+  {
+    provide: APP_INITIALIZER,
+    useFactory: SubWindowWithServiceFactory,
+    deps: [SubWindowWithService],
+    multi: true
+  },
   // 初始化暗黑模式还是default模式的css
   // Initialize the css of dark mode or default mode
   {
@@ -90,7 +90,7 @@ const APPINIT_PROVIDES = [
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, CoreModule, LoginModalModule, SharedModule, AppRoutingModule],
-  providers: [...interceptors, ...APPINIT_PROVIDES],
+  providers: [...APPINIT_PROVIDES],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

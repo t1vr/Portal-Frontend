@@ -49,8 +49,8 @@ export class SettingDrawerComponent implements OnInit {
   _themesOptions: SettingInterface = {
     theme: 'dark',
     color: '#1890FF',
-    mode: 'side',
-    fixedTab: false,
+    mode: 'top',
+    fixedTab: true,
     isShowTab: true,
     splitNav: true,
     greyTheme: false,
@@ -69,13 +69,13 @@ export class SettingDrawerComponent implements OnInit {
     {
       key: 'dark',
       image: '/assets/imgs/theme-dark.svg',
-      title: '暗色菜单风格',
+      title: 'dark menu style',
       isChecked: true
     },
     {
       key: 'light',
       image: '/assets/imgs/theme-light.svg',
-      title: '亮色菜单风格',
+      title: 'Bright menu style',
       isChecked: false
     }
   ];
@@ -133,19 +133,19 @@ export class SettingDrawerComponent implements OnInit {
     {
       key: 'side',
       image: '/assets/imgs/menu-side.svg',
-      title: '侧边菜单布局',
+      title: 'side menu layout',
       isChecked: true
     },
     {
       key: 'top',
       image: '/assets/imgs/menu-top.svg',
-      title: '顶部菜单布局',
+      title: 'top menu layout',
       isChecked: false
     },
     {
       key: 'mixi',
       image: '/assets/imgs/menu-top.svg',
-      title: '混合菜单布局',
+      title: 'Hybrid menu layout',
       isChecked: false
     }
   ];
