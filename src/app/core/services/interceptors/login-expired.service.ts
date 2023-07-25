@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { filter, finalize, share, switchMap } from 'rxjs/operators';
 
-import { TokenKey, loginTimeOutCode, tokenErrorCode } from '@config/constant';
+import { TokenHeaderKey, loginTimeOutCode, tokenErrorCode } from '@config/constant';
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { ModalBtnStatus } from '@widget/base-modal';
 import { LoginModalService } from '@widget/biz-widget/login/login-modal.service';
@@ -38,10 +38,10 @@ export class LoginExpiredService implements HttpInterceptor {
   private sendRequest(request: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<NzSafeAny> | null {
     return this.refresher!.pipe(
       switchMap(() => {
-        const token = this.windowServe.getSessionStorage(TokenKey);
+        const token = this.windowServe.getSessionStorage(TokenHeaderKey);
         let httpConfig = {};
         if (!!token) {
-          httpConfig = { headers: request.headers.set(TokenKey, token) };
+          httpConfig = { headers: request.headers.set(TokenHeaderKey, token) };
         }
         this.refresher = null;
         const copyReq = request.clone(httpConfig);

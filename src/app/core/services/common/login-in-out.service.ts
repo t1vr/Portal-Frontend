@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { ActionCode } from '@config/actionCode';
-import { TokenKey, TokenPre } from '@config/constant';
+import { TokenHeaderKey, TokenPrefix } from '@config/constant';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
 import { TabService } from '@core/services/common/tab.service';
 import { WindowService } from '@core/services/common/window.service';
@@ -39,11 +39,11 @@ export class LoginInOutService {
 
   loginIn(token: string): Promise<void> {
     return new Promise(resolve => {
-      // 将 token 持久化缓存，请注意，如果没有缓存，则会在路由守卫中被拦截，不让路由跳转
-      // 这个路由守卫在src/app/core/services/common/guard/judgeLogin.guard.ts
-      this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
+      // Keep the token in a persistent cache, please note that if there is no cache, it will be intercepted in the route guard, preventing the route from jumping
+      // This route guard is in src/app/core/services/common/guard/judgeLogin.guard.ts
+      this.windowServe.setSessionStorage(TokenHeaderKey, TokenPrefix + token);
       // 解析token ，然后获取用户信息
-      const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);
+      const userInfo: UserInfo = this.userInfoService.parsToken(TokenPrefix + token);
       // todo  这里是手动添加静态页面标签页操作中打开详情的按钮的权限，因为他们涉及到路由跳转，会走路由守卫，但是权限又没有通过后端管理，所以下面两行手动添加权限，实际操作中可以删除下面2行
       userInfo.authCode.push(ActionCode.TabsDetail);
       userInfo.authCode.push(ActionCode.SearchTableDetail);
@@ -83,7 +83,7 @@ export class LoginInOutService {
 
   clearSessionCash(): Promise<void> {
     return new Promise(resolve => {
-      this.windowServe.removeSessionStorage(TokenKey);
+      this.windowServe.removeSessionStorage(TokenHeaderKey);
       this.menuService.setMenuArrayStore([]);
       resolve();
     });

@@ -28,6 +28,8 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   constructor(private destroy$: DestroyService, private themesService: ThemeService, private windowService: WindowService) {}
 
   changeCollapsed(): void {
+        console.log(this.isOverMode, "collapsed")
+
     if (this.isOverMode) {
       this.navDrawer.showDraw();
       return;

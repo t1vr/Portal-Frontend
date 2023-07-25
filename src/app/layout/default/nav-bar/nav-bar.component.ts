@@ -146,7 +146,6 @@ export class NavBarComponent implements OnInit {
     this.clickMenuItem(this.menus);
     this.clickMenuItem(this.copyMenus);
     this.cdr.markForCheck();
-    console.log('static--->', this.menuToken);
     // console.log(this.copyMenus);
 
     // this.menuServices

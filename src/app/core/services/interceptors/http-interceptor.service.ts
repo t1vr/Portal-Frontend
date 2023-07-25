@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, filter } from 'rxjs/operators';
 
-import { TokenKey } from '@config/constant';
+import { TokenHeaderKey } from '@config/constant';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -25,10 +25,10 @@ export class HttpInterceptorService implements HttpInterceptor {
   constructor(private windowServe: WindowService, public message: NzMessageService) {}
 
   intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
-    const token = this.windowServe.getSessionStorage(TokenKey);
+    const token = this.windowServe.getSessionStorage(TokenHeaderKey);
     let httpConfig: CustomHttpConfig = {};
     if (!!token) {
-      httpConfig = { headers: req.headers.set(TokenKey, token) };
+      httpConfig = { headers: req.headers.set(TokenHeaderKey, token) };
     }
     const copyReq = req.clone(httpConfig);
     return next.handle(copyReq).pipe(

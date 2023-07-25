@@ -4,9 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Theme, ThemeMode } from '@app/layout/default/setting-drawer/setting-drawer.component';
 
 export interface SettingInterface {
-  theme: Theme['key']; // 主题模式（暗黑模式，明亮模式）
+  theme: Theme['key']; // Theme modes (dark mode, light mode)
   color: string; // 主题色
-  mode: ThemeMode['key']; // 菜单模式（侧边模式，顶部模式，混合模式）
+  mode: ThemeMode['key']; // Menu modes (side mode, top mode, mixed mode)
   colorWeak: boolean; // 色弱
   greyTheme: boolean; // 灰色模式
   fixedHead: boolean; // 固定头部
@@ -65,7 +65,7 @@ export class ThemeService {
     return this.isNightTheme$.asObservable();
   }
 
-  // 主题是否over侧边栏
+  // Whether the theme is over the sidebar
   setIsOverMode(isNight: boolean): void {
     this.isOverModeTheme$.next(isNight);
   }
