@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TokenHeaderKey, TokenKey, TokenPrefix } from '@app/config/constant';
+import { Tenant } from '@app/models/tenant.model';
 
 @Injectable({ providedIn: 'root' })
 export class LocalStorageService {
@@ -7,7 +8,6 @@ export class LocalStorageService {
   setTenantIdentifier(tenantIdentifier: string): void {
     localStorage.setItem('tenantIdentifier', tenantIdentifier);
   }
-
 
   getTenantIdentifier(): string {
     return localStorage.getItem('tenantIdentifier') as string;
