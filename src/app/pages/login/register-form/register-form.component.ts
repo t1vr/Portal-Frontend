@@ -30,9 +30,7 @@ export class RegisterFormComponent implements OnInit {
     var createTenantRequestModel = new CreateTenantRequestModel();
     createTenantRequestModel.adminEmail = this.validateForm.value.adminEmail;
     createTenantRequestModel.name = this.validateForm.value.name;
-    createTenantRequestModel.identifier = this.validateForm.value.name;
-    createTenantRequestModel.firstName = this.validateForm.value.name;
-    createTenantRequestModel.lastName = this.validateForm.value.name;
+    createTenantRequestModel.identifier = this.validateForm.value.identifier;
     createTenantRequestModel.password = this.validateForm.value.password;
 
     this.authService.registerTenant(createTenantRequestModel).subscribe(
@@ -44,6 +42,7 @@ export class RegisterFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
+      identifier: [null, [Validators.required]],
       name: [null, [Validators.required]],
       adminEmail: [null, [Validators.required]],
       password: [null, [Validators.required]],

@@ -6,6 +6,18 @@
         [formGroup]="validateForm"
         (ngSubmit)="submitForm()"
     >
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input the organization unique identifier!">
+          <nz-input-group [nzSize]="'large'">
+              <input
+                  type="text"
+                  formControlName="identifier"
+                  nz-input
+                  placeholder="Organization identifier"
+              />
+          </nz-input-group>
+      </nz-form-control>
+  </nz-form-item>
         <nz-form-item>
             <nz-form-control nzErrorTip="Please input the organization name!">
                 <nz-input-group [nzSize]="'large'">
