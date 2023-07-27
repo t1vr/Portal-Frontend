@@ -6,13 +6,13 @@
       <app-water-mark></app-water-mark>
       <div nz-row [nzGutter]="[32, 32]">
         <div nz-col nzSpan="24">
-          <nz-card nzTitle="进行中的项目" [nzExtra]="extraTemplate">
+          <nz-card nzTitle="ongoing projects" [nzExtra]="extraTemplate">
             <div nz-row>
               <div *ngFor="let i of 6 | numberLoop" nz-card-grid nz-col [nzLg]="8" [nzMd]="12" [nzSm]="24" [nzXl]="8" [nzXs]="24" [nzXXl]="8">
-                <nz-card-meta nzDescription="城镇中有那么多的酒馆，她却偏偏走进了我的酒馆" [nzTitle]="cardTitleTpl"></nz-card-meta>
+                <nz-card-meta nzDescription="There's so many saloons in town and she walks into mine" [nzTitle]="cardTitleTpl"></nz-card-meta>
                 <div class="card-foot">
-                  <span nz-typography nzType="secondary">小华</span>
-                  <span nz-typography nzType="secondary">4年前</span>
+                  <span nz-typography nzType="secondary">Xiaohua</span>
+                  <span nz-typography nzType="secondary">4 years ago</span>
                 </div>
               </div>
             </div>
@@ -26,13 +26,13 @@
                   <nz-list-item-meta-avatar [nzSrc]="'assets/imgs/default_face.png'"></nz-list-item-meta-avatar>
                   <nz-list-item-meta-title>
                     <a>
-                      曲丽丽 在
-                      <span class="operate-text">高逼格设计天团</span>
-                      新建项目
-                      <span class="operate-text">六月迭代</span>
+                      Qu Lili is in
+                      <span class="operate-text">High-quality design team</span>
+                      New Project
+                      <span class="operate-text">June iteration</span>
                     </a>
                   </nz-list-item-meta-title>
-                  <nz-list-item-meta-description>19 天前</nz-list-item-meta-description>
+                  <nz-list-item-meta-description>19 Days ago</nz-list-item-meta-description>
                 </nz-list-item-meta>
               </nz-list-item>
             </nz-list>
@@ -44,32 +44,32 @@
       <app-water-mark></app-water-mark>
       <div nz-row [nzGutter]="[32, 32]">
         <div nz-col nzSpan="24">
-          <nz-card nzTitle="快速开始/便捷导航">
+          <nz-card nzTitle="Quick Start/Easy Navigation">
             <div nz-row [nzGutter]="[16, 16]">
               <div *ngFor="let item of 6 | numberLoop" nz-col nzSpan="6">
-                <a (click)="msg.success('点击了')">操作一</a>
+                <a (click)="msg.success('clicked')">operation one</a>
               </div>
               <div nz-col nzSpan="6">
                 <button nz-button nzGhost nzType="primary" [nzSize]="'small'">
                   <i nz-icon nzType="plus"></i>
-                  <span>添加</span>
+                  <span>Add to</span>
                 </button>
               </div>
             </div>
           </nz-card>
         </div>
         <div nz-col nzSpan="24">
-          <nz-card nzTitle="xx指数">
+          <nz-card nzTitle="xx index">
             <div id="randar"></div>
           </nz-card>
         </div>
         <div nz-col nzSpan="24">
-          <nz-card nzTitle="团队">
+          <nz-card nzTitle="team">
             <div nz-row>
               <div *ngFor="let item of 5 | numberLoop" nz-col nzSpan="12">
                 <a class="group">
                   <nz-avatar [nzSize]="24" [nzSrc]="'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png'"></nz-avatar>
-                  <span class="m-l-10">科学搬砖组</span>
+                  <span class="m-l-10">Scientific moving brick group</span>
                 </a>
               </div>
             </div>
@@ -88,28 +88,28 @@
           <img alt="" src="assets/imgs/default_face.png" />
         </div>
         <div nz-col nzFlex="1">
-          <h4 class="left-start-center m-0" nz-typography style="height: 50%">早安，Serati Ma，祝你开心每一天！</h4>
-          <div class="left-start-center" nz-typography nzType="secondary" style="height: 50%">交互专家 |蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</div>
+          <h4 class="left-start-center m-0" nz-typography style="height: 50%">Good morning, Serati Ma, I wish you a happy day!</h4>
+          <div class="left-start-center" nz-typography nzType="secondary" style="height: 50%">Interaction Expert | Ant Financial - XX business group - XX platform department - XX technology department - UED</div>
         </div>
       </div>
     </div>
     <div nz-col nzFlex="280px">
       <nz-row>
         <nz-col [nzSpan]="8">
-          <nz-statistic [nzTitle]="'项目数'" [nzValue]="(56 | number)!"></nz-statistic>
+          <nz-statistic [nzTitle]="'number of items'" [nzValue]="(56 | number)!"></nz-statistic>
         </nz-col>
         <nz-col [nzSpan]="8">
-          <nz-statistic [nzTitle]="'团队内排名'" [nzValue]="'8/24'"></nz-statistic>
+          <nz-statistic [nzTitle]="'Ranking within the team'" [nzValue]="'8/24'"></nz-statistic>
         </nz-col>
         <nz-col [nzSpan]="8">
-          <nz-statistic [nzTitle]="'项目访问'" [nzValue]="(2223 | number)!"></nz-statistic>
+          <nz-statistic [nzTitle]="'project access'" [nzValue]="(2223 | number)!"></nz-statistic>
         </nz-col>
       </nz-row>
     </div>
   </div>
 </ng-template>
 <ng-template #extraTemplate>
-  <a class="operate-text">全部项目</a>
+  <a class="operate-text">all items</a>
 </ng-template>
 
 <ng-template #cardTitleTpl>

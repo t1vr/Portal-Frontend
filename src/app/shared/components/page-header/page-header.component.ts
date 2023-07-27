@@ -24,11 +24,11 @@ export class PageHeaderComponent implements OnInit {
   @Input() backUrl = '';
   themesOptions$ = this.themesService.getThemesMode();
 
-  constructor(private themesService: ThemeService, private router: Router) {}
+  constructor(private themesService: ThemeService, private router: Router) { }
 
   back(): void {
     this.router.navigateByUrl(this.backUrl);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
