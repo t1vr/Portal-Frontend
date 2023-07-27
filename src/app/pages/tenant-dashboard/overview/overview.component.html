@@ -1,0 +1,33 @@
+<app-page-header [pageHeaderInfo]="pageHeaderInfo"></app-page-header>
+
+<ng-template #pageHeaderContent>
+    <div class="mini-screen" nz-row>
+        <div nz-col nzFlex="1">
+            <div nz-row>
+                <div class="m-r-25" nz-col nzFlex="72px">
+                    <img alt="" src="assets/imgs/default_face.png" />
+                </div>
+                <div nz-col nzFlex="1">
+                    <h4
+                        class="left-start-center m-0"
+                        nz-typography
+                        style="height: 50%"
+                    >
+                        Good day, We wish you a happy day!
+                    </h4>
+                    <div
+                        class="left-start-center"
+                        nz-typography
+                        nzType="secondary"
+                        style="height: 50%"
+                    >
+                        {{ tenant.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div nz-col nzFlex="280px">
+
+        </div>
+    </div>
+</ng-template>

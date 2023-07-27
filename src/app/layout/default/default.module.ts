@@ -11,9 +11,10 @@ import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { TabComponent } from './tab/tab.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
+import { TenantDashboardModule } from '@app/pages/tenant-dashboard/tenant-dashboard.module';
 
 @NgModule({
   declarations: [DefaultComponent, TabComponent, SideNavComponent, NavBarComponent, ToolBarComponent, NavDrawerComponent],
-  imports: [SharedModule, DefLayoutContentModule, DefaultRoutingModule, NzNoAnimationModule]
+  imports: [SharedModule, DefLayoutContentModule, DefaultRoutingModule, NzNoAnimationModule, TenantDashboardModule]
 })
-export class DefaultModule {}
+export class DefaultModule { }

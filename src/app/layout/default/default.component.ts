@@ -25,11 +25,9 @@ export class DefaultComponent implements OnInit, AfterViewInit {
   isOverMode = false; // Whether the navigation bar becomes a drawer mode when the window is narrowed
   @ViewChild('navDrawer') navDrawer!: NavDrawerComponent;
 
-  constructor(private destroy$: DestroyService, private themesService: ThemeService, private windowService: WindowService) {}
+  constructor(private destroy$: DestroyService, private themesService: ThemeService, private windowService: WindowService) { }
 
   changeCollapsed(): void {
-        console.log(this.isOverMode, "collapsed")
-
     if (this.isOverMode) {
       this.navDrawer.showDraw();
       return;

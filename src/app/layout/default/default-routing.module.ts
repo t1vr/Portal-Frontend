@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DefaultComponent } from './default.component';
+import { TenantDashboardModule } from '../../pages/tenant-dashboard/tenant-dashboard.module';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
       {
         path: 'about',
         loadChildren: () => import('../../pages/about/about.module').then(m => m.AboutModule)
+      },
+      {
+        path: ':tenantIdentifier',
+        data: { preload: true },
+        loadChildren: () => import('../../pages/tenant-dashboard/tenant-dashboard.module').then(m => m.TenantDashboardModule)
       }
     ]
   }
