@@ -1,16 +1,17 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import { DestroyService } from '@core/services/common/destory.service';
 import { TabModel, TabService } from '@core/services/common/tab.service';
 import { Menu } from '@core/services/types';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
-import { fnStopMouseEvent } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzContextMenuService, NzDropdownMenuComponent } from 'ng-zorro-antd/dropdown';
+import { NzContextMenuService } from 'ng-zorro-antd/dropdown';
+import { LocalStorageService } from '@app/core/services/common/local.storage.service';
+import { UiQuery } from '@app/core/services/State/ui/ui.query';
 
 @Component({
   selector: 'app-tab',
@@ -29,15 +30,18 @@ export class TabComponent implements OnInit {
   isOverMode = false;
   isCollapsed$ = this.themesService.getIsCollapsed();
   isCollapsed = false;
+  currentlySelectedTabIndex$ = this.uiQuery.currentlySelectedTabIndex$;
 
   constructor(
     public tabService: TabService,
     private nzContextMenuService: NzContextMenuService,
     private splitNavStoreService: SplitNavStoreService,
     private themesService: ThemeService,
+    private localStorage: LocalStorageService,
     private destroy$: DestroyService,
     public router: Router,
-    public cdr: ChangeDetectorRef
+    public cdr: ChangeDetectorRef,
+    public uiQuery: UiQuery
   ) {
     this.router.events.pipe(filter((event: NzSafeAny) => event instanceof NavigationEnd)).subscribe((event: NzSafeAny) => {
       this.cdr.markForCheck();
@@ -57,63 +61,24 @@ export class TabComponent implements OnInit {
     this.router.navigateByUrl(tab.path);
   }
 
-  // 右键点击关闭右侧tab
-  closeRithTab(tab: TabModel, e: MouseEvent, index: number): void {
-    fnStopMouseEvent(e);
-    this.tabService.delRightTab(tab.path, index);
-  }
-
-  // 右键点击关闭左侧tab
-  closeLeftTab(tab: TabModel, e: MouseEvent, index: number): void {
-    if (index === 0) {
-      return;
-    }
-    fnStopMouseEvent(e);
-    this.tabService.delLeftTab(tab.path, index);
-  }
-
-  // 关闭其他tab
-  closeOtherTab(tab: TabModel, e: MouseEvent, index: number): void {
-    fnStopMouseEvent(e);
-    this.tabService.delOtherTab(tab.path, index);
-  }
-
-  // 右键关闭当前Tab
-  closeTab(tab: TabModel, e: MouseEvent, index: number): void {
-    fnStopMouseEvent(e);
-    this.closeCurrentTab(tab, index);
-  }
-
-  // 点击tab上的关闭icon
-  clickCloseIcon(indexObj: { index: number }): void {
-    this.closeCurrentTab(this.tabsSourceData[indexObj.index], indexObj.index);
-  }
-
-  // 关闭当前Tab
-  closeCurrentTab(tab: TabModel, index: number): void {
-    if (this.tabsSourceData.length === 1) {
-      return;
-    }
-    this.tabService.delTab(tab, index);
-    // ngZoneEventCoalescing，ngZoneRunCoalescing例子,请查看main.ts
-    this.cdr.detectChanges();
-  }
-
-  refresh(): void {
-    this.tabService.refresh();
-  }
-
-  contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent): void {
-    this.nzContextMenuService.create($event, menu);
-  }
-
-  closeMenu(): void {
-    this.nzContextMenuService.close();
-  }
-
   ngOnInit(): void {
-    this.tabsSourceData$.pipe(takeUntil(this.destroy$)).subscribe(res => {
-      this.tabsSourceData = res;
-    });
+    this.tenantIdentifier = this.localStorage.getTenantIdentifier();
+    this.initTabData();
+  }
+
+  tenantIdentifier: string | undefined;
+  initTabData(): void {
+    this.tabsSourceData = [
+      {
+        title: 'Overview',
+        path: `default/${this.tenantIdentifier}/overview`,
+        snapshotArray: []
+      },
+      {
+        title: 'Programs',
+        path: `default/${this.tenantIdentifier}/programs`,
+        snapshotArray: []
+      }
+    ]
   }
 }
