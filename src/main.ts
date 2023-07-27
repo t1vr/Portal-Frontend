@@ -2,11 +2,32 @@ import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from '@app/app.module';
+import { akitaConfig, persistState } from '@datorama/akita';
 import { environment } from '@env/environment';
+import * as localForage from 'localforage';
 
 if (environment.production) {
   enableProdMode();
 }
+
+//local storage driver config
+localForage.config({
+  driver: localForage.INDEXEDDB,
+  name: 'Portal',
+  version: 1.0,
+  storeName: 'akita-local-state'
+});
+
+//for persistant state  after page reload in akita
+export const akitaPersistStorage = persistState({
+  storage: localForage
+});
+
+//for resetting akita stores
+akitaConfig({
+  resettable: true
+});
+
 /*
  * https://netbasal.com/reduce-change-detection-cycles-with-event-coalescing-in-angular-c4037199859f
  * ngZoneEventCoalescing: true，ngZoneRunCoalescing: true
