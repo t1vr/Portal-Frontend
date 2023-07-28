@@ -1,3 +1,5 @@
+import { AppUser } from "./user.model";
+
 export interface BaseResponse<T> {
   message: string;
   statusCode: number;
@@ -11,8 +13,8 @@ export interface BaseAuditableResponse {
   lastModifiedBy: Date;
   lastModifiedAt: Date;
 }
-
 export interface LoginResponseModel {
+  userResponse:AppUser
   token: string;
   refreshToken: string;
   refreshTokenExpiryTime: string;

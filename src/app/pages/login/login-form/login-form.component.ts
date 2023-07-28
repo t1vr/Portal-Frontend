@@ -1,18 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
-import { LoginInOutService } from '@core/services/common/login-in-out.service';
-import { WindowService } from '@core/services/common/window.service';
-import { LoginService } from '@core/services/http/login/login.service';
-import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { SpinService } from '@store/common-store/spin.service';
-import { UserInfoService } from '@store/common-store/userInfo.service';
 import { fnCheckForm } from '@utils/tools';
 import { LocalStorageService } from '@app/core/services/common/local.storage.service';
 import { AuthService } from '@app/core/services/common/auth.service';
 import { LoginResponseModel } from '@app/models/response.model';
+import { AppUserStore } from '@app/core/services/State/user/app-user.store';
 
 @Component({
   selector: 'app-login-form',
@@ -28,7 +23,8 @@ export class LoginFormComponent implements OnInit {
     private spinService: SpinService,
     private router: Router,
     private authService: AuthService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private appUserStore: AppUserStore
   ) { }
 
   ngOnInit(): void {
@@ -46,10 +42,15 @@ export class LoginFormComponent implements OnInit {
 
     this.spinService.setCurrentGlobalSpinStore(true);
     this.authService.login(this.validateForm.value).subscribe(
-      (x: LoginResponseModel) => {
-        this.localStorageService.setUserToken(x.token);
+      (response: LoginResponseModel) => {
+        this.localStorageService.setUserToken(response.token);
+        this.appUserStore.update({ ...response.userResponse })
         this.spinService.setCurrentGlobalSpinStore(false);
-        this.router.navigateByUrl('default/dashboard/workbench');
+        this.router.navigateByUrl(`default/${response.userResponse.tenantId}/overview`);
+      },
+      (error) => {
+        this.spinService.setCurrentGlobalSpinStore(false);
+
       }
     )
   }

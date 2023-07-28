@@ -78,3 +78,10 @@ export interface Menu {
   code?: string; // 权限码
   newLinkFlag?: 0 | 1; // 是否是新页
 }
+
+
+
+export interface AppRole {
+  id: number;
+  roleName: string;
+}
