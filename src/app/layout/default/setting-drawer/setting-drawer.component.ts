@@ -59,7 +59,7 @@ export class SettingDrawerComponent implements OnInit {
     fixedHead: true,
     hasTopArea: true,
     hasFooterArea: true,
-    hasNavArea: true,
+    hasNavArea: false,
     hasNavHeadArea: true
   };
   isCollapsed = false;

@@ -20,14 +20,7 @@ export class UiStateService {
   }
 
   saveTenantStateInfo(tenant: Tenant) {
-    console.log(tenant)
-
-    this.uiStore.update({tenant:tenant});
-
-    this.saveTenantIdentifier(tenant.identifier);
-    // this.uiStore.update((_) => {
-    //   tenant: tenant;
-    // });
+    this.uiStore.update({ tenant: tenant });
   }
 
   getTenantStateInfo(): Observable<Tenant> {

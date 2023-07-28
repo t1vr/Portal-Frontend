@@ -1,10 +1,9 @@
-import { Component, Input, TemplateRef, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, TemplateRef, ViewChild } from "@angular/core";
 import { PageHeaderType } from "@app/shared/components/page-header/page-header.component";
 import { NzSafeAny } from "ng-zorro-antd/core/types";
 import { UiStateService } from "@app/core/services/State/ui/ui.state.service";
 import { Tenant } from "@app/models/tenant.model";
 import { UiStore } from "@app/core/services/State/ui/ui.store";
-import { UiQuery } from "@app/core/services/State/ui/ui.query";
 
 @Component({
   selector: "app-overview",
@@ -21,7 +20,8 @@ export class OverviewComponent {
 
   tenant: Tenant;
   constructor(private uiStateService: UiStateService,
-    private uiStore: UiStore) { }
+    private uiStore: UiStore,
+    private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.uiStore.update({ currentlySelectedTabIndex: 0 });
@@ -35,7 +35,7 @@ export class OverviewComponent {
         title: this.tenant ? this.tenant.name : "No Title",
         desc: this.pageHeaderContent,
       };
-      console.log(this.pageHeaderInfo)
+      this.cdRef.detectChanges();
     });
   }
 
@@ -44,5 +44,6 @@ export class OverviewComponent {
       title: this.tenant ? this.tenant.name : "No Title",
       desc: this.pageHeaderContent,
     };
+
   }
 }
