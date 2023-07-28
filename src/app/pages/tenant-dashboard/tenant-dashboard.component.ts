@@ -29,7 +29,7 @@ export class TenantDashboardComponent implements OnInit {
           .subscribe((response: BaseResponse<Tenant>) => {
             if (response.succeeded) {
               this.tenant = response.data;
-              this.localStorageService.setTenantIdentifier(params['tenantId'])
+              this.localStorageService.setTenantIdentifier(params['tenantIdentifier'])
               this.uiStateService.saveTenantStateInfo(this.tenant);
             }
           });

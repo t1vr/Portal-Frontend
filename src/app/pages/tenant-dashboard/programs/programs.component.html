@@ -1,3 +1,109 @@
-<p>
-  programs works!
-</p>
+<div class="normal-table-wrap">
+    <!-- <nz-card>
+        <div nz-row>
+            <div
+                class="center"
+                nz-col
+                [nzLg]="8"
+                [nzMd]="8"
+                [nzSm]="8"
+                [nzXl]="8"
+                [nzXs]="24"
+                [nzXXl]="8"
+            >
+                <nz-statistic
+                    [nzTitle]="'我的待办'"
+                    [nzValue]="'8个任务'"
+                ></nz-statistic>
+            </div>
+            <div
+                class="center"
+                nz-col
+                nz-row
+                [nzLg]="8"
+                [nzMd]="8"
+                [nzSm]="8"
+                [nzXl]="8"
+                [nzXs]="24"
+                [nzXXl]="8"
+            >
+                <nz-divider nzType="vertical"></nz-divider>
+                <div nz-col nzFlex="1">
+                    <nz-statistic
+                        [nzTitle]="'本周任务平均处理时间'"
+                        [nzValue]="'32分钟'"
+                    ></nz-statistic>
+                </div>
+                <nz-divider nzType="vertical"></nz-divider>
+            </div>
+            <div
+                class="center"
+                nz-col
+                [nzLg]="8"
+                [nzMd]="8"
+                [nzSm]="8"
+                [nzXl]="8"
+                [nzXs]="24"
+                [nzXXl]="8"
+            >
+                <nz-statistic
+                    [nzTitle]="'本周完成任务数'"
+                    [nzValue]="'24个任务'"
+                ></nz-statistic>
+            </div>
+        </div>
+    </nz-card> -->
+    <div nz-row [nzGutter]="[32, 32]">
+        <div nz-col nzSpan="8">
+            <nz-card nzTitle="Academic Programs">
+                <div nz-row *ngFor="let item of programs">
+                    <div
+                        nz-card-grid
+                        nz-col
+                        [nzLg]="24"
+                        [nzMd]="24"
+                        [nzSm]="24"
+                        [nzXl]="24"
+                        [nzXs]="24"
+                        [nzXXl]="24"
+                    >
+                        <div class="m-l-10" (click)="loadCourses(item.id)">
+                            {{ item.name }}
+                        </div>
+                    </div>
+                </div>
+            </nz-card>
+        </div>
+        <div nz-col nzSpan="16">
+            <nz-card nzTitle="Courses">
+                <nz-list>
+                    <nz-list-item
+                        *ngFor="let item of 6 | numberLoop"
+                        style="padding: 16px 24px"
+                    >
+                        <nz-list-item-meta>
+                            <nz-list-item-meta-avatar
+                                [nzSrc]="'assets/imgs/default_face.png'"
+                            ></nz-list-item-meta-avatar>
+                            <nz-list-item-meta-title>
+                                <a>
+                                    Qu Lili is in
+                                    <span class="operate-text">
+                                        High-quality design team
+                                    </span>
+                                    New Project
+                                    <span class="operate-text">
+                                        June iteration
+                                    </span>
+                                </a>
+                            </nz-list-item-meta-title>
+                            <nz-list-item-meta-description>
+                                19 Days ago
+                            </nz-list-item-meta-description>
+                        </nz-list-item-meta>
+                    </nz-list-item>
+                </nz-list>
+            </nz-card>
+        </div>
+    </div>
+</div>
