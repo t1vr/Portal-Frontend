@@ -17,3 +17,9 @@ export class CreateTenantRequestModel {
   adminEmail!: string;
   password!: string;
 }
+
+
+export interface CreateProgramRequest extends BaseRequestModel{
+  id:string;
+  name:string;
+}
