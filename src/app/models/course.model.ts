@@ -12,7 +12,7 @@ export interface Syllabus {
 
 export interface CourseItem {
     id: number;
-    courseNo: string;
+    courseCode: string;
     name: string;
     creditHours: number;
     semester: string;
